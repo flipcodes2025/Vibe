@@ -1,0 +1,53 @@
+name: Vibe APK bouwen
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Onderdelen installeren
+        run: npm install --no-audit --no-fund
+
+      - name: Android-project maken
+        run: |
+          npx cap add android
+          cp -r native/. android/
+          sed -i 's/minSdkVersion = 22/minSdkVersion = 26/' android/variables.gradle
+          npx cap sync android
+
+      - name: Android-licenties accepteren
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+
+      - name: APK bouwen
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: APK klaarzetten om te downloaden
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk Vibe.apk
+          gh release create "v${{ github.run_number }}" Vibe.apk \
+            --title "Vibe ${{ github.run_number }}" \
+            --notes "Download Vibe.apk en open hem op je telefoon." \
+            --target "${{ github.sha }}"

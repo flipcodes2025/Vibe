@@ -1,0 +1,9 @@
+{
+  "appId": "nl.vibe.player",
+  "appName": "Vibe",
+  "webDir": "www",
+  "backgroundColor": "#14101c",
+  "plugins": {
+    "CapacitorHttp": { "enabled": true }
+  }
+}

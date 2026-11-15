@@ -1,0 +1,61 @@
+VIBE VOOR ANDROID - zo krijg je de app op je telefoon
+=====================================================
+
+Je hebt een gratis GitHub-account nodig. GitHub bouwt de app voor je
+(dat kost niets en je hoeft zelf niets te installeren).
+
+
+STAP 1  Account maken
+  Ga naar github.com en kies "Sign up". Volg de stappen.
+
+STAP 2  Een plek voor de app maken
+  Klik rechtsboven op het plusje, dan "New repository".
+  Naam: vibe   (Public of Private maakt niet uit)
+  Klik op "Create repository".
+
+STAP 3  De bestanden uploaden
+  Pak deze zip uit op je computer.
+  Klik op de pagina van je nieuwe repository op "uploading an existing file".
+  Sleep ALLES uit de uitgepakte map erin:
+     - de mappen  www  en  native  en  .github
+     - de bestanden  package.json  en  capacitor.config.json
+  Klik onderaan op "Commit changes".
+
+  Komt de map .github niet mee? (Die is soms onzichtbaar.)
+  Doe dan dit:
+     1. Klik op "Add file" en dan "Create new file".
+     2. Typ bij de naam:  .github/workflows/build-apk.yml
+     3. Open het bestand build-apk.yml uit de zip, kopieer alles en plak het.
+     4. Klik op "Commit changes".
+
+STAP 4  Wachten tot de app klaar is
+  Open het tabblad "Actions". Je ziet "Vibe APK bouwen" met een gele bol.
+  Dat duurt ongeveer 10 minuten. Een groen vinkje betekent: klaar.
+  Start het niet vanzelf? Klik links op "Vibe APK bouwen" en dan op
+  "Run workflow".
+
+STAP 5  De app downloaden
+  Ga terug naar de hoofdpagina van je repository.
+  Klik rechts op "Releases" en open de nieuwste.
+  Tik onder "Assets" op  Vibe.apk  (doe dit gewoon op je telefoon).
+
+STAP 6  Installeren
+  Open het gedownloade Vibe.apk.
+  Android vraagt om "onbekende apps" te mogen installeren voor je browser.
+  Zet dat aan en kies "Installeren".
+  Waarschuwt Play Protect? Kies "Toch installeren". Dit is je eigen app.
+
+STAP 7  De eerste keer openen
+  - Geef toestemming voor muziek en meldingen.
+  - Ga naar Instellingen en kies "Alle bestanden toestaan".
+    Dat is nodig voor .lrc- en .srt-ondertitels naast je nummers.
+  - Kies je muziekmap (bijvoorbeeld de map waar OneDrive of Syncthing je
+    nummers neerzet) of laat staan op "Alle muziek".
+
+
+Mislukt het bouwen (rood kruisje)?
+  Klik op het rode item, kopieer de rode foutregels en stuur ze naar Claude.
+
+Een nieuwe versie later?
+  Upload de nieuwe bestanden op dezelfde manier. GitHub bouwt dan opnieuw
+  en zet een nieuw Vibe.apk onder "Releases".
